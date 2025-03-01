@@ -203,8 +203,8 @@
             border: 2px solid var(--secondary-color);
             transition: var(--transition);
             position: relative;
-            overflow: visible; /* Changed to allow glow to extend outward */
-            z-index: 1; /* Ensure section content is above logo */
+            overflow: visible;
+            z-index: 1;
         }
 
         .links-section:hover {
@@ -220,7 +220,7 @@
             margin-bottom: 1.5rem;
             transition: var(--transition);
             position: relative;
-            z-index: 2; /* Ensure text is above logo */
+            z-index: 2;
         }
 
         .links-section:hover h3 {
@@ -231,7 +231,7 @@
         .links-list {
             list-style: none;
             position: relative;
-            z-index: 2; /* Ensure links are above logo */
+            z-index: 2;
         }
 
         .links-list li {
@@ -287,7 +287,6 @@
             transform: rotate(20deg);
         }
 
-        /* Hover Logo Effects */
         .links-section::after {
             content: '';
             position: absolute;
@@ -297,8 +296,8 @@
             height: 250px;
             opacity: 0;
             transition: opacity 0.3s ease;
-            filter: brightness(1) blur(0.5px) drop-shadow(0 0 30px rgba(255, 255, 255, 1)); /* Enhanced outward glow */
-            z-index: 0; /* Behind content */
+            filter: brightness(1) blur(0.5px) drop-shadow(0 0 30px rgba(255, 255, 255, 1));
+            z-index: 0;
         }
 
         .links-section.personal-links:hover::after {
@@ -326,7 +325,6 @@
             animation: flicker 3s infinite;
         }
 
-        /* Music Player Styles */
         .music-player {
             position: absolute;
             background: rgba(0,0,0,0.8);
@@ -492,7 +490,6 @@
             border-radius: 5px;
         }
 
-        /* Music Note Decorations */
         .music-player::before,
         .music-player::after {
             content: '♪';
@@ -520,7 +517,6 @@
             50% { transform: translateY(-20px); opacity: 1; }
         }
 
-        /* Explosion Particles */
         .explosion-particles {
             position: absolute;
             pointer-events: none;
@@ -532,7 +528,6 @@
             display: block;
         }
 
-        /* Explosion Text Effect */
         .explosion-text {
             position: fixed;
             top: 0;
@@ -567,7 +562,6 @@
             100% { transform: scale(1); opacity: 0; }
         }
 
-        /* Animations */
         @keyframes pulseBG {
             0% { background-color: var(--primary-color); }
             50% { background-color: #1A2E44; }
@@ -611,57 +605,18 @@
         }
 
         @media (max-width: 768px) {
-            .logo-text h1 {
-                font-size: 1.8rem;
-            }
-
-            .brand-logo {
-                width: 150px;
-            }
-
-            .hero-subtitle {
-                font-size: 1rem;
-            }
-
-            .links-content h2 {
-                font-size: 1.8rem;
-            }
-
-            .links-container {
-                grid-template-columns: 1fr;
-            }
-
-            .links-section h3 {
-                font-size: 1.5rem;
-            }
-
-            .music-player {
-                width: 300px;
-                padding: 0.8rem;
-            }
-
-            .music-player.minimized {
-                width: 80px;
-                height: 40px;
-            }
-
-            .music-player .song-title {
-                font-size: 1rem;
-            }
-
-            .music-player.minimized .song-title {
-                font-size: 0.8rem;
-            }
-
-            .music-player button {
-                font-size: 1.2rem;
-            }
-
-            /* Adjust hover logo size for smaller screens */
-            .links-section::after {
-                width: 150px;
-                height: 150px;
-            }
+            .logo-text h1 { font-size: 1.8rem; }
+            .brand-logo { width: 150px; }
+            .hero-subtitle { font-size: 1rem; }
+            .links-content h2 { font-size: 1.8rem; }
+            .links-container { grid-template-columns: 1fr; }
+            .links-section h3 { font-size: 1.5rem; }
+            .music-player { width: 300px; padding: 0.8rem; }
+            .music-player.minimized { width: 80px; height: 40px; }
+            .music-player .song-title { font-size: 1rem; }
+            .music-player.minimized .song-title { font-size: 0.8rem; }
+            .music-player button { font-size: 1.2rem; }
+            .links-section::after { width: 150px; height: 150px; }
         }
     </style>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -711,26 +666,26 @@
                     <div class="links-section personal-links fade-in">
                         <h3>個人專屬連結</h3>
                         <ul class="links-list">
-                            <li><a href="https://www.instagram.com/lyctiger/" target="_blank"><i class="fab fa-instagram"></i>Instagram - @lyctiger</a></li>
-                            <li><a href="https://www.facebook.com/liyuchiutiger.gongminshen/" target="_blank"><i class="fab fa-facebook"></i>Facebook - LiyuChiuTiger</a></li>
-                            <li><a href="https://store.line.me/search/zh-Hant?q=LiyuChiuTiger" target="_blank"><i class="fab fa-line"></i>Line Store - LiyuChiuTiger</a></li>
-                            <li><a href="https://scratch.mit.edu/users/e85069/" target="_blank"><i class="fas fa-code"></i>Scratch - e85069</a></li>
+                            <li><a href="https://www.instagram.com/lyctiger/"><i class="fab fa-instagram"></i>Instagram - @lyctiger</a></li>
+                            <li><a href="https://www.facebook.com/liyuchiutiger.gongminshen/"><i class="fab fa-facebook"></i>Facebook - LiyuChiuTiger</a></li>
+                            <li><a href="https://store.line.me/search/zh-Hant?q=LiyuChiuTiger"><i class="fab fa-line"></i>Line Store - LiyuChiuTiger</a></li>
+                            <li><a href="https://scratch.mit.edu/users/e85069/"><i class="fas fa-code"></i>Scratch - e85069</a></li>
                         </ul>
                     </div>
                     <div class="links-section gms-links fade-in">
                         <h3>品牌創立 | 公民神</h3>
                         <ul class="links-list">
-                            <li><a href="https://gongminshen.tumblr.com/" target="_blank"><i class="fas fa-globe"></i>公民神官方網站</a></li>
-                            <li><a href="https://sites.google.com/view/gongminshen" target="_blank"><i class="fas fa-users"></i>公民神協作平臺</a></li>
-                            <li><a href="https://www.facebook.com/GongMinShen" target="_blank"><i class="fab fa-facebook"></i>公民神FB粉專</a></li>
-                            <li><a href="https://www.instagram.com/gongminshen/" target="_blank"><i class="fab fa-instagram"></i>公民神IG粉專</a></li>
+                            <li><a href="https://gongminshen.tumblr.com/"><i class="fas fa-globe"></i>公民神官方網站</a></li>
+                            <li><a href="https://sites.google.com/view/gongminshen"><i class="fas fa-users"></i>公民神協作平臺</a></li>
+                            <li><a href="https://www.facebook.com/GongMinShen"><i class="fab fa-facebook"></i>公民神FB粉專</a></li>
+                            <li><a href="https://www.instagram.com/gongminshen/"><i class="fab fa-instagram"></i>公民神IG粉專</a></li>
                         </ul>
                     </div>
                     <div class="links-section mu-links fade-in">
                         <h3>品牌創立 | Μμ</h3>
                         <ul class="links-list">
-                            <li><a href="https://mumumutiger.tumblr.com/" target="_blank"><i class="fas fa-globe"></i>Μμ官方網站</a></li>
-                            <li><a href="https://www.facebook.com/profile.php?id=100070187297866#" target="_blank"><i class="fab fa-facebook"></i>ΜμFB粉專</a></li>
+                            <li><a href="https://mumumutiger.tumblr.com/"><i class="fas fa-globe"></i>Μμ官方網站</a></li>
+                            <li><a href="https://www.facebook.com/profile.php?id=100070187297866#"><i class="fab fa-facebook"></i>ΜμFB粉專</a></li>
                         </ul>
                     </div>
                 </div>
@@ -744,7 +699,6 @@
         </div>
     </footer>
 
-    <!-- Music Player -->
     <div class="music-player minimized" id="music-player">
         <div class="header">
             <div class="song-title">Song Name</div>
@@ -766,7 +720,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Fade-in Observer
             const fadeElements = document.querySelectorAll('.fade-in');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -778,7 +731,6 @@
             }, { threshold: 0.2 });
             fadeElements.forEach(element => observer.observe(element));
 
-            // Cyberpunk Particles
             const canvas = document.querySelector('.cyber-particles');
             const ctx = canvas.getContext('2d');
             canvas.width = window.innerWidth;
@@ -846,7 +798,6 @@
             initParticles();
             animateParticles();
 
-            // Music Player Logic
             const audio = new Audio();
             const songs = [
                 'music/At Last.mp3',
@@ -869,6 +820,7 @@
                 const fileName = songs[index].split('/').pop().replace('.mp3', '');
                 songTitle.textContent = fileName;
                 audio.load();
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
             }
 
             function playSong() {
@@ -943,7 +895,6 @@
 
             progressContainer.addEventListener('click', setProgress);
 
-            // Draggable Functionality (Mouse)
             let isDragging = false;
             let currentX = window.innerWidth - 140;
             let currentY = 20;
@@ -978,7 +929,6 @@
                 }
             });
 
-            // Touch Dragging for Mobile/Tablet
             musicPlayer.addEventListener('touchstart', (e) => {
                 if (e.target === musicPlayer || e.target.classList.contains('header')) {
                     isDragging = true;
@@ -1025,12 +975,9 @@
             musicPlayer.style.top = `${currentY}px`;
             window.addEventListener('resize', adjustPosition);
 
-            // Load and autoplay initial song
             loadSong(currentSongIndex);
-            playSong();
             updateVolumeBackground();
 
-            // LiyuChill Logo Growth and Explosion
             const logo = document.getElementById('liyu-chill-logo');
             let scale = 1;
             const maxScale = 5;
