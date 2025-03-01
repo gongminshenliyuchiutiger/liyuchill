@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiyuChillSystem</title>
+    <style>
+        :root {
+            --primary-color: #0D1B2A;
+            --secondary-color: #00FFFF;
+            --accent-color: #FF00FF;
+            --text-color: #E0E0E0;
+            --dark-color: #000000;
+            --neon-glow: 0 0 5px var(--secondary-color), 
+                        0 0 15px var(--secondary-color),
+                        0 0 30px var(--accent-color);
+            --white-neon-glow: 0 0 5px #FFFFFF, 
+                              0 0 15px #FFFFFF,
+                              0 0 30px #FFFFFF;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            animation: pulseBG 5s infinite alternate;
+        }
+
+        .cyber-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(to bottom, rgba(13,27,42,0.9), rgba(13,27,42,0.7));
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-text h1 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--secondary-color);
+            text-shadow: var(--neon-glow);
+            transition: var(--transition);
+            cursor: pointer;
+            animation: glitchText 2s infinite;
+        }
+
+        .logo-text h1:hover {
+            color: var(--accent-color);
+            text-shadow: 0 0 25px var(--accent-color), 0 0 50px var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color), #FFFF00, #00FF00);
+            opacity: 0.15;
+            animation: gradientShift 8s ease infinite;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand-logo {
+            width: 200px;
+            height: auto;
+            margin: 0 auto 1.5rem;
+            filter: drop-shadow(var(--neon-glow));
+            transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+            cursor: pointer;
+        }
+
+        .brand-logo:hover {
+            transform: rotate(360deg) scale(1.2);
+            filter: drop-shadow(0 0 40px var(--accent-color));
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #FFFFFF;
+            text-shadow: var(--white-neon-glow);
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+            animation: flicker 1.5s infinite;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .tag {
+            background: rgba(0,0,0,0.7);
+            color: var(--secondary-color);
+            padding: 0.6rem 1.4rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            border: 2px solid var(--secondary-color);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, var(--accent-color), transparent);
+            transition: var(--transition);
+        }
+
+        .tag:hover::before {
+            left: 100%;
+        }
+
+        .tag:hover {
+            background: var(--accent-color);
+            color: var(--dark-color);
+            box-shadow: var(--neon-glow);
+            transform: translateY(-5px) rotate(5deg);
+        }
+
+        .links {
+            padding: 4rem 0;
+        }
+
+        .links-content h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            text-shadow: var(--neon-glow);
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+        }
+
+        .links-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .links-section {
+            background: rgba(0,0,0,0.5);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .links-section:hover {
+            box-shadow: var(--neon-glow);
+            transform: scale(1.03);
+            background: rgba(0,0,0,0.8);
+        }
+
+        .links-section h3 {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            text-shadow: 0 0 15px var(--accent-color);
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .links-section:hover h3 {
+            color: #FFFF00;
+            text-shadow: 0 0 20px #FFFF00;
+        }
+
+        .links-list {
+            list-style: none;
+        }
+
+        .links-list li {
+            margin-bottom: 1.2rem;
+        }
+
+        .links-list a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--secondary-color);
+            text-decoration: none;
+            padding: 1rem;
+            border-radius: 8px;
+            transition: var(--transition);
+            text-shadow: 0 0 5px var(--secondary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .links-list a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-color);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+
+        .links-list a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        .links-list a:hover {
+            background: rgba(255,0,255,0.2);
+            color: var(--text-color);
+            box-shadow: var(--neon-glow);
+            transform: translateX(10px);
+        }
+
+        .links-list i {
+            font-size: 1.4rem;
+            transition: var(--transition);
+        }
+
+        .links-list a:hover i {
+            color: #00FF00;
+            transform: rotate(20deg);
+        }
+
+        footer {
+            background: var(--primary-color);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--secondary-color);
+            text-shadow: 0 0 5px var(--secondary-color);
+            border-top: 2px solid var(--secondary-color);
+            animation: flicker 3s infinite;
+        }
+
+        /* Music Player Styles */
+        .music-player {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.8);
+            padding: 1rem;
+            border-radius: 15px;
+            border: 2px solid var(--secondary-color);
+            box-shadow: var(--neon-glow);
+            z-index: 100;
+            width: 400px;
+            transition: all 0.3s ease;
+            cursor: move;
+            user-select: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .music-player.minimized {
+            width: 120px;
+            height: 60px;
+            padding: 0.5rem;
+        }
+
+        .music-player .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .music-player .song-title {
+            color: var(--secondary-color);
+            text-shadow: var(--neon-glow);
+            font-size: 1.2rem;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .music-player.minimized .song-title {
+            font-size: 0.9rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .music-player .minimize-btn {
+            background: none;
+            border: none;
+            color: var(--secondary-color);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .music-player .minimize-btn:hover {
+            color: var(--accent-color);
+            text-shadow: 0 0 10px var(--accent-color);
+        }
+
+        .music-player .controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-grow: 1;
+            align-items: center;
+        }
+
+        .music-player.minimized .controls {
+            gap: 0.5rem;
+            justify-content: center;
+            align-items: center;
+            margin-top: 0;
+        }
+
+        .music-player.minimized .controls #prev-btn,
+        .music-player.minimized .controls #next-btn {
+            display: none;
+        }
+
+        .music-player button {
+            background: none;
+            border: none;
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .music-player.minimized button {
+            font-size: 1rem;
+        }
+
+        .music-player button:hover {
+            color: var(--accent-color);
+            text-shadow: 0 0 10px var(--accent-color);
+            transform: scale(1.2);
+        }
+
+        .music-player .progress-container {
+            width: 100%;
+            height: 5px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+            margin-top: 0.5rem;
+        }
+
+        .music-player.minimized .progress-container {
+            display: none;
+        }
+
+        .music-player .progress {
+            width: 0%;
+            height: 100%;
+            background: var(--accent-color);
+            border-radius: 5px;
+            transition: width 0.1s linear;
+        }
+
+        .music-player .volume-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .music-player.minimized .volume-container {
+            display: none;
+        }
+
+        .music-player .volume-icon {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+
+        .music-player .volume-slider {
+            width: 100px;
+            -webkit-appearance: none;
+            height: 5px;
+            background: rgba(255,255,255,0.2);
+            outline: none;
+            border-radius: 5px;
+        }
+
+        .music-player .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 5px var(--accent-color);
+        }
+
+        /* Music Note Decorations */
+        .music-player::before,
+        .music-player::after {
+            content: '♪';
+            position: absolute;
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            text-shadow: var(--neon-glow);
+            animation: floatNotes 3s infinite ease-in-out;
+        }
+
+        .music-player::before {
+            top: -10px;
+            left: 10px;
+            animation-delay: 0s;
+        }
+
+        .music-player::after {
+            bottom: -10px;
+            right: 10px;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes floatNotes {
+            0%, 100% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(-20px); opacity: 1; }
+        }
+
+        /* Explosion Particles */
+        .explosion-particles {
+            position: absolute;
+            pointer-events: none;
+            z-index: 2;
+            display: none;
+        }
+
+        .explosion-particles.active {
+            display: block;
+        }
+
+        /* Explosion Text Effect */
+        .explosion-text {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .explosion-text.active {
+            display: flex;
+        }
+
+        .explosion-text span {
+            font-size: 10vw;
+            font-weight: bold;
+            text-shadow: 0 0 20px var(--secondary-color), 0 0 40px var(--accent-color), 0 0 60px #FFFF00;
+            animation: explodeText 1s ease-out forwards;
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color), #FFFF00, #00FF00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        @keyframes explodeText {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+
+        /* Animations */
+        @keyframes pulseBG {
+            0% { background-color: var(--primary-color); }
+            50% { background-color: #1A2E44; }
+            100% { background-color: var(--primary-color); }
+        }
+
+        @keyframes glitchText {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(2px, -2px); }
+            60% { transform: translate(-2px, 0); }
+            80% { transform: translate(2px, 2px); }
+            100% { transform: translate(0); }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .logo-text h1 {
+                font-size: 1.8rem;
+            }
+
+            .brand-logo {
+                width: 150px;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .links-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .links-container {
+                grid-template-columns: 1fr;
+            }
+
+            .links-section h3 {
+                font-size: 1.5rem;
+            }
+
+            .music-player {
+                width: 300px;
+                padding: 0.8rem;
+            }
+
+            .music-player.minimized {
+                width: 80px;
+                height: 40px;
+            }
+
+            .music-player .song-title {
+                font-size: 1rem;
+            }
+
+            .music-player.minimized .song-title {
+                font-size: 0.8rem;
+            }
+
+            .music-player button {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas class="cyber-particles"></canvas>
+    <canvas class="explosion-particles" id="explosion-canvas"></canvas>
+    <div class="explosion-text" id="explosion-text"><span>神爆了</span></div>
+
+    <header>
+        <div class="container">
+            <div class="header-content fade-in">
+                <div class="logo-text">
+                    <h1>LiyuChillSystem</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <img src="image/LiyuChill.svg" alt="LiyuChill" class="brand-logo" id="liyu-chill-logo">
+                <p class="hero-subtitle">LiyuChill | LiyuChiuTiger | 鯉魚邱老虎 | 公民神 | 資訊神</p>
+                <div class="tags">
+                    <span class="tag">#MBTI-ENFJ</span>
+                    <span class="tag">#公民即生活生活即公民</span>
+                    <span class="tag">#佛系生產</span>
+                    <span class="tag">#數位成癮</span>
+                    <span class="tag">#沉浸式寫CODE</span>
+                    <span class="tag">#與AI好朋友</span>
+                    <span class="tag">#求質人生</span>
+                    <span class="tag">#平衡生活哲學</span>
+                    <span class="tag">#望趨近老莊</span>
+                    <span class="tag">#望身心靈財富自由</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="links">
+        <div class="container">
+            <div class="links-content">
+                <h2 class="fade-in">連結與平台</h2>
+                <div class="links-container">
+                    <div class="links-section fade-in">
+                        <h3>個人專屬連結</h3>
+                        <ul class="links-list">
+                            <li><a href="https://www.instagram.com/lyctiger/" target="_blank"><i class="fab fa-instagram"></i>Instagram - @lyctiger</a></li>
+                            <li><a href="https://www.facebook.com/liyuchiutiger.gongminshen/" target="_blank"><i class="fab fa-facebook"></i>Facebook - LiyuChiuTiger</a></li>
+                            <li><a href="https://store.line.me/search/zh-Hant?q=LiyuChiuTiger" target="_blank"><i class="fab fa-line"></i>Line Store - LiyuChiuTiger</a></li>
+                            <li><a href="https://scratch.mit.edu/users/e85069/" target="_blank"><i class="fas fa-code"></i>Scratch - e85069</a></li>
+                        </ul>
+                    </div>
+                    <div class="links-section fade-in">
+                        <h3>品牌創立 | 公民神</h3>
+                        <ul class="links-list">
+                            <li><a href="https://gongminshen.tumblr.com/" target="_blank"><i class="fas fa-globe"></i>公民神官方網站</a></li>
+                            <li><a href="https://sites.google.com/view/gongminshen" target="_blank"><i class="fas fa-users"></i>公民神協作平臺</a></li>
+                            <li><a href="https://www.facebook.com/GongMinShen" target="_blank"><i class="fab fa-facebook"></i>公民神FB粉專</a></li>
+                            <li><a href="https://www.instagram.com/gongminshen/" target="_blank"><i class="fab fa-instagram"></i>公民神IG粉專</a></li>
+                        </ul>
+                    </div>
+                    <div class="links-section fade-in">
+                        <h3>品牌創立 | Μμ</h3>
+                        <ul class="links-list">
+                            <li><a href="https://mumumutiger.tumblr.com/" target="_blank"><i class="fas fa-globe"></i>Μμ官方網站</a></li>
+                            <li><a href="https://www.facebook.com/profile.php?id=100070187297866#" target="_blank"><i class="fab fa-facebook"></i>ΜμFB粉專</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Copyright © Liyuchiutiger Gongminshen</p>
+        </div>
+    </footer>
+
+    <!-- Music Player -->
+    <div class="music-player" id="music-player">
+        <div class="header">
+            <div class="song-title">Song Name</div>
+            <button class="minimize-btn" id="minimize-btn"><i class="fas fa-minus"></i></button>
+        </div>
+        <div class="controls">
+            <button id="prev-btn"><i class="fas fa-backward"></i></button>
+            <button id="play-pause-btn"><i class="fas fa-play"></i></button>
+            <button id="next-btn"><i class="fas fa-forward"></i></button>
+        </div>
+        <div class="progress-container" id="progress-container">
+            <div class="progress" id="progress"></div>
+        </div>
+        <div class="volume-container">
+            <i class="fas fa-volume-up volume-icon"></i>
+            <input type="range" min="0" max="1" step="0.01" value="1" class="volume-slider" id="volume-slider">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fade-in Observer
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            fadeElements.forEach(element => observer.observe(element));
+
+            // Cyberpunk Particles
+            const canvas = document.querySelector('.cyber-particles');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const particles = [];
+            const colors = ['#00FFFF', '#FF00FF', '#FFFF00', '#00FF00'];
+
+            function Particle(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 5 + 1;
+                this.speedX = Math.random() * 3 - 1.5;
+                this.speedY = Math.random() * 3 - 1.5;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            Particle.prototype.update = function() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.size > 0.2) this.size -= 0.1;
+            };
+
+            Particle.prototype.draw = function() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            };
+
+            function initParticles() {
+                for (let i = 0; i < 100; i++) {
+                    particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height));
+                }
+            }
+
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].draw();
+                    if (particles[i].size <= 0.2) {
+                        particles.splice(i, 1);
+                        i--;
+                        particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height));
+                    }
+                }
+                requestAnimationFrame(animateParticles);
+            }
+
+            canvas.addEventListener('mousemove', (e) => {
+                for (let i = 0; i < 5; i++) {
+                    particles.push(new Particle(e.x, e.y));
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                explosionCanvas.width = window.innerWidth;
+                explosionCanvas.height = window.innerHeight;
+            });
+
+            initParticles();
+            animateParticles();
+
+            // Music Player Logic
+            const audio = new Audio();
+            const songs = [
+                'music/At Last.mp3',
+                'music/Like Humans Do.mp3',
+                'music/The Ice Hotel.mp3'
+            ];
+            let currentSongIndex = 0;
+            const musicPlayer = document.getElementById('music-player');
+            const songTitle = document.querySelector('.song-title');
+            const playPauseBtn = document.getElementById('play-pause-btn');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const minimizeBtn = document.getElementById('minimize-btn');
+            const progressContainer = document.getElementById('progress-container');
+            const progress = document.getElementById('progress');
+            const volumeSlider = document.getElementById('volume-slider');
+
+            function loadSong(index) {
+                audio.src = songs[index];
+                const fileName = songs[index].split('/').pop().replace('.mp3', '');
+                songTitle.textContent = fileName;
+                audio.load();
+            }
+
+            function playSong() {
+                audio.play();
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+
+            function pauseSong() {
+                audio.pause();
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            }
+
+            function updateProgress() {
+                const { duration, currentTime } = audio;
+                const progressPercent = (currentTime / duration) * 100;
+                progress.style.width = `${progressPercent}%`;
+            }
+
+            function setProgress(e) {
+                const width = progressContainer.clientWidth;
+                const clickX = e.offsetX;
+                const duration = audio.duration;
+                audio.currentTime = (clickX / width) * duration;
+            }
+
+            playPauseBtn.addEventListener('click', () => {
+                const isPlaying = !audio.paused;
+                if (isPlaying) {
+                    pauseSong();
+                } else {
+                    playSong();
+                }
+            });
+
+            prevBtn.addEventListener('click', () => {
+                currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+                loadSong(currentSongIndex);
+                playSong();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                currentSongIndex = (currentSongIndex + 1) % songs.length;
+                loadSong(currentSongIndex);
+                playSong();
+            });
+
+            minimizeBtn.addEventListener('click', () => {
+                musicPlayer.classList.toggle('minimized');
+                minimizeBtn.innerHTML = musicPlayer.classList.contains('minimized') 
+                    ? '<i class="fas fa-plus"></i>' 
+                    : '<i class="fas fa-minus"></i>';
+                adjustPosition();
+            });
+
+            volumeSlider.addEventListener('input', (e) => {
+                audio.volume = e.target.value;
+            });
+
+            audio.addEventListener('timeupdate', updateProgress);
+
+            audio.addEventListener('ended', () => {
+                currentSongIndex = (currentSongIndex + 1) % songs.length;
+                loadSong(currentSongIndex);
+                playSong();
+            });
+
+            progressContainer.addEventListener('click', setProgress);
+
+            // Draggable Functionality with Improved Sensitivity
+            let isDragging = false;
+            let currentX = 20;
+            let currentY = 20;
+            let initialX;
+            let initialY;
+
+            musicPlayer.addEventListener('mousedown', (e) => {
+                if (e.target === musicPlayer || e.target.classList.contains('header')) {
+                    isDragging = true;
+                    initialX = e.clientX - currentX;
+                    initialY = e.clientY - currentY;
+                    musicPlayer.style.transition = 'none';
+                }
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    e.preventDefault();
+                    const newX = e.clientX - initialX;
+                    const newY = e.clientY - initialY;
+                    currentX = clamp(newX, 0, window.innerWidth - musicPlayer.offsetWidth);
+                    currentY = clamp(newY, 0, window.innerHeight - musicPlayer.offsetHeight);
+                    musicPlayer.style.left = `${currentX}px`;
+                    musicPlayer.style.top = `${currentY}px`;
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    musicPlayer.style.transition = 'all 0.3s ease';
+                }
+            });
+
+            function clamp(value, min, max) {
+                return Math.max(min, Math.min(max, value));
+            }
+
+            function adjustPosition() {
+                const rect = musicPlayer.getBoundingClientRect();
+                currentX = clamp(rect.left, 0, window.innerWidth - musicPlayer.offsetWidth);
+                currentY = clamp(rect.top, 0, window.innerHeight - musicPlayer.offsetHeight);
+                musicPlayer.style.left = `${currentX}px`;
+                musicPlayer.style.top = `${currentY}px`;
+            }
+
+            musicPlayer.style.left = `${currentX}px`;
+            musicPlayer.style.top = `${currentY}px`;
+            window.addEventListener('resize', adjustPosition);
+
+            // Load initial song
+            loadSong(currentSongIndex);
+
+            // LiyuChill Logo Growth and Explosion
+            const logo = document.getElementById('liyu-chill-logo');
+            let scale = 1;
+            const maxScale = 5;
+            const explosionCanvas = document.getElementById('explosion-canvas');
+            const explosionCtx = explosionCanvas.getContext('2d');
+            explosionCanvas.width = window.innerWidth;
+            explosionCanvas.height = window.innerHeight;
+            const explosionText = document.getElementById('explosion-text');
+
+            const explosionParticles = [];
+            let shrinkTimeout;
+
+            function ExplosionParticle(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 10 + 5;
+                this.speedX = Math.random() * 6 - 3;
+                this.speedY = Math.random() * 6 - 3;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.life = 60;
+            }
+
+            ExplosionParticle.prototype.update = function() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.life--;
+                if (this.size > 0.2) this.size -= 0.1;
+            };
+
+            ExplosionParticle.prototype.draw = function() {
+                explosionCtx.fillStyle = this.color;
+                explosionCtx.beginPath();
+                explosionCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                explosionCtx.fill();
+            };
+
+            function animateExplosion() {
+                explosionCtx.clearRect(0, 0, explosionCanvas.width, explosionCanvas.height);
+                for (let i = 0; i < explosionParticles.length; i++) {
+                    explosionParticles[i].update();
+                    explosionParticles[i].draw();
+                    if (explosionParticles[i].life <= 0) {
+                        explosionParticles.splice(i, 1);
+                        i--;
+                    }
+                }
+                if (explosionParticles.length > 0) {
+                    requestAnimationFrame(animateExplosion);
+                } else {
+                    explosionCanvas.classList.remove('active');
+                    explosionText.classList.remove('active'); // Hide text when particles are done
+                }
+            }
+
+            function resetLogo() {
+                scale = 1;
+                logo.style.transform = `scale(${scale})`;
+                logo.style.opacity = '1';
+            }
+
+            function shrinkLogo() {
+                clearTimeout(shrinkTimeout);
+                shrinkTimeout = setTimeout(() => {
+                    if (scale > 1 && scale < maxScale) {
+                        resetLogo();
+                    }
+                }, 1000);
+            }
+
+            logo.addEventListener('click', () => {
+                scale += 0.5;
+                if (scale >= maxScale) {
+                    const rect = logo.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+                    for (let i = 0; i < 50; i++) {
+                        explosionParticles.push(new ExplosionParticle(centerX, centerY));
+                    }
+                    explosionCanvas.classList.add('active');
+                    explosionText.classList.add('active'); // Show "神爆了" text
+                    animateExplosion();
+                    logo.style.opacity = '0';
+                    setTimeout(() => {
+                        resetLogo();
+                    }, 1000);
+                } else {
+                    logo.style.transform = `scale(${scale})`;
+                    shrinkLogo();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
