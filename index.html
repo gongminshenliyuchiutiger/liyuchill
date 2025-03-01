@@ -202,6 +202,9 @@
             border-radius: 15px;
             border: 2px solid var(--secondary-color);
             transition: var(--transition);
+            position: relative;
+            overflow: visible; /* Changed to allow glow to extend outward */
+            z-index: 1; /* Ensure section content is above logo */
         }
 
         .links-section:hover {
@@ -216,6 +219,8 @@
             text-shadow: 0 0 15px var(--accent-color);
             margin-bottom: 1.5rem;
             transition: var(--transition);
+            position: relative;
+            z-index: 2; /* Ensure text is above logo */
         }
 
         .links-section:hover h3 {
@@ -225,6 +230,8 @@
 
         .links-list {
             list-style: none;
+            position: relative;
+            z-index: 2; /* Ensure links are above logo */
         }
 
         .links-list li {
@@ -280,6 +287,35 @@
             transform: rotate(20deg);
         }
 
+        /* Hover Logo Effects */
+        .links-section::after {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 250px;
+            height: 250px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            filter: brightness(1) blur(0.5px) drop-shadow(0 0 30px rgba(255, 255, 255, 1)); /* Enhanced outward glow */
+            z-index: 0; /* Behind content */
+        }
+
+        .links-section.personal-links:hover::after {
+            background: url('image/logo_Liyu.svg') no-repeat center/contain;
+            opacity: 0.5;
+        }
+
+        .links-section.gms-links:hover::after {
+            background: url('image/logo_GMS.svg') no-repeat center/contain;
+            opacity: 0.5;
+        }
+
+        .links-section.mu-links:hover::after {
+            background: url('image/logo_Μμ.svg') no-repeat center/contain;
+            opacity: 0.5;
+        }
+
         footer {
             background: var(--primary-color);
             padding: 2rem 0;
@@ -293,8 +329,6 @@
         /* Music Player Styles */
         .music-player {
             position: absolute;
-            top: 20px;
-            left: 20px;
             background: rgba(0,0,0,0.8);
             padding: 1rem;
             border-radius: 15px;
@@ -418,6 +452,7 @@
             align-items: center;
             gap: 0.5rem;
             margin-top: 0.5rem;
+            width: 100%;
         }
 
         .music-player.minimized .volume-container {
@@ -427,25 +462,34 @@
         .music-player .volume-icon {
             color: var(--secondary-color);
             font-size: 1.2rem;
+            flex-shrink: 0;
         }
 
         .music-player .volume-slider {
-            width: 100px;
+            width: 100%;
             -webkit-appearance: none;
-            height: 5px;
-            background: rgba(255,255,255,0.2);
+            height: 8px;
+            background: linear-gradient(to right, var(--accent-color) 0%, var(--accent-color) 100%, rgba(255,255,255,0.2) 100%, rgba(255,255,255,0.2) 100%);
+            background-size: 100% 100%;
             outline: none;
             border-radius: 5px;
+            cursor: pointer;
         }
 
         .music-player .volume-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             width: 15px;
             height: 15px;
-            background: var(--accent-color);
+            background: var(--secondary-color);
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 0 5px var(--accent-color);
+            box-shadow: 0 0 5px var(--secondary-color);
+        }
+
+        .music-player .volume-slider::-webkit-slider-runnable-track {
+            background: rgba(255,255,255,0.2);
+            height: 8px;
+            border-radius: 5px;
         }
 
         /* Music Note Decorations */
@@ -612,6 +656,12 @@
             .music-player button {
                 font-size: 1.2rem;
             }
+
+            /* Adjust hover logo size for smaller screens */
+            .links-section::after {
+                width: 150px;
+                height: 150px;
+            }
         }
     </style>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -658,7 +708,7 @@
             <div class="links-content">
                 <h2 class="fade-in">連結與平台</h2>
                 <div class="links-container">
-                    <div class="links-section fade-in">
+                    <div class="links-section personal-links fade-in">
                         <h3>個人專屬連結</h3>
                         <ul class="links-list">
                             <li><a href="https://www.instagram.com/lyctiger/" target="_blank"><i class="fab fa-instagram"></i>Instagram - @lyctiger</a></li>
@@ -667,7 +717,7 @@
                             <li><a href="https://scratch.mit.edu/users/e85069/" target="_blank"><i class="fas fa-code"></i>Scratch - e85069</a></li>
                         </ul>
                     </div>
-                    <div class="links-section fade-in">
+                    <div class="links-section gms-links fade-in">
                         <h3>品牌創立 | 公民神</h3>
                         <ul class="links-list">
                             <li><a href="https://gongminshen.tumblr.com/" target="_blank"><i class="fas fa-globe"></i>公民神官方網站</a></li>
@@ -676,7 +726,7 @@
                             <li><a href="https://www.instagram.com/gongminshen/" target="_blank"><i class="fab fa-instagram"></i>公民神IG粉專</a></li>
                         </ul>
                     </div>
-                    <div class="links-section fade-in">
+                    <div class="links-section mu-links fade-in">
                         <h3>品牌創立 | Μμ</h3>
                         <ul class="links-list">
                             <li><a href="https://mumumutiger.tumblr.com/" target="_blank"><i class="fas fa-globe"></i>Μμ官方網站</a></li>
@@ -695,10 +745,10 @@
     </footer>
 
     <!-- Music Player -->
-    <div class="music-player" id="music-player">
+    <div class="music-player minimized" id="music-player">
         <div class="header">
             <div class="song-title">Song Name</div>
-            <button class="minimize-btn" id="minimize-btn"><i class="fas fa-minus"></i></button>
+            <button class="minimize-btn" id="minimize-btn"><i class="fas fa-plus"></i></button>
         </div>
         <div class="controls">
             <button id="prev-btn"><i class="fas fa-backward"></i></button>
@@ -790,6 +840,7 @@
                 canvas.height = window.innerHeight;
                 explosionCanvas.width = window.innerWidth;
                 explosionCanvas.height = window.innerHeight;
+                adjustPosition();
             });
 
             initParticles();
@@ -843,6 +894,11 @@
                 audio.currentTime = (clickX / width) * duration;
             }
 
+            function updateVolumeBackground() {
+                const volumePercent = audio.volume * 100;
+                volumeSlider.style.background = `linear-gradient(to right, var(--accent-color) 0%, var(--accent-color) ${volumePercent}%, rgba(255,255,255,0.2) ${volumePercent}%, rgba(255,255,255,0.2) 100%)`;
+            }
+
             playPauseBtn.addEventListener('click', () => {
                 const isPlaying = !audio.paused;
                 if (isPlaying) {
@@ -874,6 +930,7 @@
 
             volumeSlider.addEventListener('input', (e) => {
                 audio.volume = e.target.value;
+                updateVolumeBackground();
             });
 
             audio.addEventListener('timeupdate', updateProgress);
@@ -886,9 +943,9 @@
 
             progressContainer.addEventListener('click', setProgress);
 
-            // Draggable Functionality with Improved Sensitivity
+            // Draggable Functionality (Mouse)
             let isDragging = false;
-            let currentX = 20;
+            let currentX = window.innerWidth - 140;
             let currentY = 20;
             let initialX;
             let initialY;
@@ -921,6 +978,37 @@
                 }
             });
 
+            // Touch Dragging for Mobile/Tablet
+            musicPlayer.addEventListener('touchstart', (e) => {
+                if (e.target === musicPlayer || e.target.classList.contains('header')) {
+                    isDragging = true;
+                    const touch = e.touches[0];
+                    initialX = touch.clientX - currentX;
+                    initialY = touch.clientY - currentY;
+                    musicPlayer.style.transition = 'none';
+                }
+            }, { passive: false });
+
+            document.addEventListener('touchmove', (e) => {
+                if (isDragging) {
+                    e.preventDefault();
+                    const touch = e.touches[0];
+                    const newX = touch.clientX - initialX;
+                    const newY = touch.clientY - initialY;
+                    currentX = clamp(newX, 0, window.innerWidth - musicPlayer.offsetWidth);
+                    currentY = clamp(newY, 0, window.innerHeight - musicPlayer.offsetHeight);
+                    musicPlayer.style.left = `${currentX}px`;
+                    musicPlayer.style.top = `${currentY}px`;
+                }
+            }, { passive: false });
+
+            document.addEventListener('touchend', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    musicPlayer.style.transition = 'all 0.3s ease';
+                }
+            });
+
             function clamp(value, min, max) {
                 return Math.max(min, Math.min(max, value));
             }
@@ -937,8 +1025,10 @@
             musicPlayer.style.top = `${currentY}px`;
             window.addEventListener('resize', adjustPosition);
 
-            // Load initial song
+            // Load and autoplay initial song
             loadSong(currentSongIndex);
+            playSong();
+            updateVolumeBackground();
 
             // LiyuChill Logo Growth and Explosion
             const logo = document.getElementById('liyu-chill-logo');
@@ -991,7 +1081,7 @@
                     requestAnimationFrame(animateExplosion);
                 } else {
                     explosionCanvas.classList.remove('active');
-                    explosionText.classList.remove('active'); // Hide text when particles are done
+                    explosionText.classList.remove('active');
                 }
             }
 
@@ -1020,7 +1110,7 @@
                         explosionParticles.push(new ExplosionParticle(centerX, centerY));
                     }
                     explosionCanvas.classList.add('active');
-                    explosionText.classList.add('active'); // Show "神爆了" text
+                    explosionText.classList.add('active');
                     animateExplosion();
                     logo.style.opacity = '0';
                     setTimeout(() => {
