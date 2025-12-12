@@ -237,7 +237,7 @@
 
         .links-container {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr); /* 修改為2欄以適應4個區塊 */
             gap: 2rem;
         }
 
@@ -352,6 +352,12 @@
 
         .links-section.gms-links:hover::after {
             background: url('image/logo_GMS.svg') no-repeat center/contain;
+            opacity: 0.5;
+        }
+
+        /* 新增：快樂鯉魚秋老虎 Logo 樣式 */
+        .links-section.happy-links:hover::after {
+            background: url('image/logo_HappyLiyuChillTiger.svg') no-repeat center/contain;
             opacity: 0.5;
         }
 
@@ -715,7 +721,7 @@
     <section class="links">
         <div class="container">
             <div class="links-content">
-                <h2 class="fade-in">連結與平台</h2>
+                <h2 class="fade-in">連結與平臺</h2>
                 <div class="links-container">
                     <div class="links-section personal-links fade-in">
                         <h3>個人專屬連結</h3>
@@ -735,6 +741,15 @@
                             <li><a href="https://www.instagram.com/gongminshen/" target="_blank"><i class="fab fa-instagram"></i>公民神IG粉專</a></li>
                         </ul>
                     </div>
+                    <!-- 新增區塊 -->
+                    <div class="links-section happy-links fade-in">
+                        <h3>品牌創立 | 快樂鯉魚秋老虎</h3>
+                        <ul class="links-list">
+                            <li><a href="https://www.facebook.com/happyliyuchilltiger/" target="_blank"><i class="fab fa-facebook"></i>快樂鯉魚秋老虎FB粉專</a></li>
+                            <li><a href="https://reurl.cc/qKG3A0" target="_blank"><i class="fas fa-globe"></i>快樂鯉魚秋老虎彙整系統</a></li>
+                        </ul>
+                    </div>
+                    <!-- 結束新增區塊 -->
                     <div class="links-section mu-links fade-in">
                         <h3>品牌創立 | Μμ</h3>
                         <ul class="links-list">
